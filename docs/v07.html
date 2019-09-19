@@ -17,6 +17,14 @@
             document.getElementById("decimal_input").innerHTML=number
             var bcd = dec2bin(number)
             document.getElementById("binary_output").innerHTML=bcd
+            //send binary number to function bin2ssd()
+            document.getElementById("bin2ssd_input").innerHTML=bin
+            var ssd = bin2ssd(bin)
+            document.getElementById("bin2ssd_output").innerHTML=ssd
+            //send ssd signals to function illuminate_segment()
+            document.getElementById("illuminate_input").innerHTML=ssd
+            illuminate(ssd)
+            document.getElementById("illuminate_output").innerHTML='done'
         }
          function dec2bin(decimal){
              //substitute a non-algorithmic solution
@@ -24,7 +32,7 @@
              var binary_numbers =  ['0000','0001','0010','0011','0100','0101','0110','0111','1000','1001']
              return(binary_numbers[decimal])
          }
-         function dec2bin(decimal){
+        function dec2bin(decimal){
              var quotient=decimal
              var output = ''
              while (quotient>0){
@@ -49,7 +57,7 @@
         </script>
     </head>
     <body>
-        <h2>Version 6 Adding Decimal to Binary Conversion(better)</h2>
+        <h2>Version 7 Stubs for Parts 3 and 4</h2>
         <table class="standardTable">
             <tr>
                 <td class="blackbox"><h3>Keypad</h3>
@@ -79,8 +87,14 @@
                 <p id="binary_output">????</p>
                 </td>
                 
-                <td class="blackbox">Binary to SSD Signals</td>
-                <td class="blackbox">Illuminate Segments</td>
+                <td class="blackbox"><h3>Binary to SSD Signals</h3>
+                <p id="binary2ssd_input"></p>
+                <p id="binary2ssd_output"></p>
+                </td>
+                <td class="blackbox"><h3>Illuminate Segments</h3>
+                <p id="illuminate_input"></p>
+                <p id="illuminate_output"></p>
+                </td>
             </tr>
         </table>
         
