@@ -40,12 +40,12 @@
              //"compute the logical expression for each segment
              //our expression for A was ~wyz+w~x~y+~x~y~z+~wy
              var a = !w&x&z || w&!x&!y ||!x&!y&!z || !w&y
-             var b = false
-             var c = false
-             var d = false
-             var e = false
-             var f = false
-             var g = false
+             var b = !w&y&z || !w&!y&!z || !w&!x|| w&!x&!y
+             var c = !w&!y||w&!x&!y||!w&y&z||!w&x&y||!w&!y&z
+             var d = !w&x&!y&z||!w&!x&y||!w&y&!z||!x&!y&!z
+             var e = !w&y&!z||!x&!y&!z
+             var f = !w&y&!z||!w&!y&!z||w&!x&!y||!w&x&!y
+             var g = !w&x&!y||w&!x&!y||!w&!x&y||!w&y&!z
              //assemble and return the output
              //we will build up the output string element by element 
              var output =''
@@ -77,7 +77,7 @@
                      {output='1'+output}
                  else
                      {output='0'+output}
-                 quotient=Math.floor(quotient/2)
+                 quotient=Math.floor(quotient/2) 
              }
              //The above algorithm leaves off the leading zone
              //and fails completely on converting 0 base 10. To

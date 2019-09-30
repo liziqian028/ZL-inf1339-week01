@@ -10,10 +10,18 @@
                 text-align:center;
                 background-color:black;
                 border-color:white;
-                color:yellow;}
+                color:yellow;
+                vertical-align: top;}
         .sevenSegmentTable{color:white;border-color:white;
                             border:solid;border-collapse: collapse;}
         .notsevenSegmentTable{border:none;}
+        .horizontal{width:40px;height:10px;}
+        .vertical{width:10px;height:40px;}
+        .red{background-color: red;}
+        .black{background-color: black;}
+        .corner{width:10px;height:10px;}
+        .middle{width:40px;height:40px;}
+        
     </style>
     <script>
         function display(number){
@@ -43,12 +51,12 @@
              //"compute the logical expression for each segment
              //our expression for A was ~wyz+w~x~y+~x~y~z+~wy
              var a = !w&x&z || w&!x&!y ||!x&!y&!z || !w&y
-             var b = false
-             var c = false
-             var d = false
-             var e = false
-             var f = false
-             var g = false
+             var b = !w&y&z || !w&!y&!z || !w&!x|| w&!x&!y
+             var c = !w&!y||w&!x&!y||!w&y&z||!w&x&y||!w&!y&z
+             var d = !w&x&!y&z||!w&!x&y||!w&y&!z||!x&!y&!z
+             var e = !w&y&!z||!x&!y&!z
+             var f = !w&y&!z||!w&!y&!z||w&!x&!y||!w&x&!y
+             var g = !w&x&!y||w&!x&!y||!w&!x&y||!w&y&!z
              //assemble and return the output
              //we will build up the output string element by element 
              var output =''
@@ -61,7 +69,43 @@
              if (g) {output=output +'1'} else {output=output+'0'}
              return (output)//initial default just illuminates segment A
          } 
-        function illuminate(){
+        function illuminate(signals){
+            document.getElementByID("segments").innerHTML=signals
+            if (signals[0]=='1'){
+                document.getElementById("segmentA").innerHTML=''
+                document.getElementById("segmentA").setAttribute("class","red")}
+            else {document.getElementById("segmentA").innerHTML=''
+                 document.getElementById("segmentA").setAttribute("class","black")}
+            if (signals[1]=='1'){
+                document.getElementById("segmentB").innerHTML=''
+            document.getElementById("segmentB").setAttribute("class","red")}
+            else {document.getElementById("segmentB").innerHTML=''
+                 document.getElementById("segmentB").setAttribute("class","black")}
+            if (signals[2]=='1'){
+                document.getElementById("segmentC").innerHTML=''
+            document.getElementById("segmentC").setAttribute("class","red")}
+            else {document.getElementById("segmentC").innerHTML=''
+                 document.getElementById("segmentC").setAttribute("class","black")}
+            if (signals[3]=='1'){
+                document.getElementById("segmentD").innerHTML=''
+            document.getElementById("segmentD").setAttribute("class","red")}
+            else {document.getElementById("segmentD").innerHTML=''
+                  document.getElementById("segmentD").setAttribute("class","black")}
+            if (signals[4]=='1'){
+                document.getElementById("segmentE").innerHTML=''
+            document.getElementById("segmentE").setAttribute("class","red")}
+            else {document.getElementById("segmentE").innerHTML=''
+                 document.getElementById("segmentE").setAttribute("class","black")}
+            if (signals[5]=='1'){
+                document.getElementById("segmentF").innerHTML=''
+             document.getElementById("segmentF").setAttribute("class","red")}
+            else {document.getElementById("segmentF").innerHTML=''
+                 document.getElementById("segmentF").setAttribute("class","black")}
+            if (signals[6]=='1'){
+                document.getElementById("segmentG").innerHTML=''
+            document.getElementById("segmentG").setAttribute("class","red")}
+            else {document.getElementById("segmentG").innerHTML=''
+                 document.getElementById("segmentG").setAttribute("class","black")}
             
         }
          function dec2bin(decimal){
@@ -80,7 +124,7 @@
                      {output='1'+output}
                  else
                      {output='0'+output}
-                 quotient=Math.floor(quotient/2)
+                 quotient=Math.floor(quotient/2) 
              }
              //The above algorithm leaves off the leading zone
              //and fails completely on converting 0 base 10. To
@@ -130,38 +174,42 @@
                 <p id="binary2ssd_output"></p>
                 </td>
                 <td class="blackbox"><h3>Illuminate Segments</h3>
-                  <p id="segments"></p>
+                <p id="illuminate_input"></p>
+                <p id="illuminate_output"></p>
+                <p id="segments"></p>
                     <table>
                     <tr>
-                        <td class="notsevenSegmentTable">1</td>
-                        <td id="segmentA"
-                            class="sevenSegmentTable">A</td>
-                        <td class="notsevenSegmentTable">3</td>
+                        <td class="notsevenSegmentTable corner">1</td>
+                        <td id="segmentA" class="sevenSegmentTable
+                        horizontal">A</td>
+                        <td class="notsevenSegmentTable corner">3</td>
                     </tr>
                     <tr>
-                        <td class="sevenSegmentTable">F</td>
-                        <td class="notsevenSegmentTable">2</td>
-                        <td class="sevenSegmentTable">B</td>
+                        <td id="segmentF" class="sevenSegmentTable
+                        vertical">F</td>
+                        <td class="notsevenSegmentTable middle">2</td>
+                        <td id="segmentB" class="sevenSegmentTable vertical">B</td>
                     </tr>
                     <tr>
-                        <td class="notsevenSegmentTable">1</td>
+                        <td class="notsevenSegmentTable corner">1</td>
                         <td id="segmentG"
-                            class="sevenSegmentTable">G</td>
-                        <td class="notsevenSegmentTable">3</td>
+                            class="sevenSegmentTable horizontal">G</td>
+                        <td class="notsevenSegmentTable corner">3</td>
                     </tr>
                     <tr>
-                        <td class="sevenSegmentTable">E</td>
-                        <td class="notsevenSegmentTable">2</td>
-                        <td class="sevenSegmentTable">C</td>
+                        <td class="sevenSegmentTable vertical">E</td>
+                        <td class="notsevenSegmentTable middle">2</td>
+                        <td class="sevenSegmentTable vertical">C</td>
                     </tr>
                     <tr>
-                        <td class="notsevenSegmentTable">1</td>
+                        <td class="notsevenSegmentTable corner">1</td>
                         <td id="segmentD"
-                            class="sevenSegmentTable">D</td>
-                        <td class="notsevenSegmentTable">3</td>
+                            class="sevenSegmentTable horizontal">D</td>
+                        <td class="notsevenSegmentTable corner">3</td>
                     </tr>
                 </table>
                 </td>
+                
             </tr>
         </table>
         
